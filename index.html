@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be Mine? ❤️</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <!-- Romantic background music -->
+    <audio id="bgMusic" autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <h1>💝 Will You Be Mine Forever? 💝</h1>
+        <div id="typingText"></div>
+        <p>You're the most special person in my life... Say YES and make me the happiest! 💕</p>
+        <div class="btns">
+            <button id="yesBtn">Yes 💕</button>
+            <button id="noBtn">No 😢</button>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+        const btns = document.querySelector(".btns");
+        const typingText = document.getElementById("typingText");
+
+        // Typing effect 💌
+        const loveMessage = "Every moment with you feels magical ❤️";
+        let i = 0;
+        function typeText() {
+            if (i < loveMessage.length) {
+                typingText.innerHTML += loveMessage.charAt(i);
+                i++;
+                setTimeout(typeText, 80);
+            }
+        }
+        typeText();
+
+        // YES button click → Fireworks 🎆 + Message
+        yesBtn.addEventListener("click", () => {
+            document.querySelector(".container").innerHTML = `
+                <h1>💖 I Love You So Much! 💖</h1>
+                <p>Thank you for saying YES! ❤️ You mean the world to me! 🌎</p>
+            `;
+            startFireworks();
+        });
+
+        // NO button runs away 😂
+        noBtn.addEventListener("mouseover", () => {
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+            const containerWidth = btns.offsetWidth - btnWidth;
+            const containerHeight = btns.offsetHeight - btnHeight;
+
+            const randomX = Math.floor(Math.random() * containerWidth);
+            const randomY = Math.floor(Math.random() * containerHeight);
+
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+        });
+
+        // Floating hearts ❤️
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.fontSize = Math.random() * 20 + 15 + "px";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 300);
+
+        // Fireworks 🎆
+        function startFireworks() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement("div");
+                    firework.classList.add("firework");
+                    firework.style.left = Math.random() * window.innerWidth + "px";
+                    firework.style.top = Math.random() * window.innerHeight + "px";
+                    document.body.appendChild(firework);
+                    setTimeout(() => firework.remove(), 1000);
+                }, i * 150);
+            }
+        }
+    </script>
+</body>
+</html>
